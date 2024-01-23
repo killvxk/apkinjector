@@ -124,11 +124,10 @@ def _inject(apk, libraries, include, activity, output, override, use_aapt):
     manifest_path = os.path.join(workdir, 'AndroidManifest.xml')
     target_activity = None
     if activity:
-        for activities in Manifest.get_activities(manifest_path):
-            for i in activities:
-                if activity in i:
-                    target_activity = i
-                    break
+        for i in Manifest.get_activities(manifest_path):
+            if activity==i:
+                target_activity = i
+                break
     else:
         target_activity = Manifest.get_main_activity(manifest_path)
     if not target_activity:
